@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/module_graph"
+    app:startDestination="@id/itemListFragment">
+    <fragment
+        android:id="@+id/itemListFragment"
+        android:name="com.example.rickandmortymodule.fragments.itemlist.ItemListFragment"
+        android:label="ItemListFragment" >
+        <action
+            android:id="@+id/action_itemListFragment_to_detailPageFragment"
+            app:destination="@id/detailPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailPageFragment"
+        android:name="com.example.rickandmortymodule.fragments.details.DetailPageFragment"
+        android:label="DetailPageFragment" >
+        <action
+            android:id="@+id/action_detailPageFragment_to_itemListFragment"
+            app:destination="@id/itemListFragment" />
+    </fragment>
+</navigation>
