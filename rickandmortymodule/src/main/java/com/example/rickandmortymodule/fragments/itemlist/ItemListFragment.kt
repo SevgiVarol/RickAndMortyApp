@@ -19,6 +19,7 @@ class ItemListFragment : Fragment(){
         viewModel = ViewModelProvider(this).get(ItemListViewModel::class.java)
         return FragmentItemListBinding.inflate(inflater, container, false).also {
 
+            
         }.root
     }
 
