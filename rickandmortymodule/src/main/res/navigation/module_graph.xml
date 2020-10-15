@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/module_graph"
-    app:startDestination="@id/itemListFragment">
+    app:startDestination="@id/List">
     <fragment
-        android:id="@+id/itemListFragment"
+        android:id="@+id/List"
         android:name="com.example.rickandmortymodule.fragments.itemlist.ItemListFragment"
         android:label="ItemListFragment" >
         <action
             android:id="@+id/action_itemListFragment_to_detailPageFragment"
-            app:destination="@id/detailPageFragment" />
+            app:destination="@id/Detail" />
+        <argument
+            android:name="id"
+            app:argType="integer"/>
     </fragment>
     <fragment
-        android:id="@+id/detailPageFragment"
+        android:id="@+id/Detail"
         android:name="com.example.rickandmortymodule.fragments.details.DetailPageFragment"
         android:label="DetailPageFragment" >
         <action
             android:id="@+id/action_detailPageFragment_to_itemListFragment"
-            app:destination="@id/itemListFragment" />
+            app:destination="@id/List" />
+
     </fragment>
 </navigation>

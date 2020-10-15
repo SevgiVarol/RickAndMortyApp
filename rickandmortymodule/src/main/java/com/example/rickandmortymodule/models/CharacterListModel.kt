@@ -2,5 +2,5 @@ package com.example.rickandmortymodule.models
 
 data class CharacterListModel(
     val info: InfoModel?,
-    val results: ArrayList<CharacterModel>?
+    val results: ArrayList<BasicResultModel>?
 )

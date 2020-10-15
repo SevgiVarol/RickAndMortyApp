@@ -7,19 +7,19 @@ data class InfoModel(
     val pages: Int?,
     val next: String?,
     val prev: String?
-){
-    fun getNextPageNum():Int?{
+) {
+    fun getNextPageNum(): Int? {
         next?.let {
             var query = URL(it).query
-            return query.substring(query.lastIndexOf("=")+1).toInt()
+            return query.substring(query.lastIndexOf("=") + 1).toInt()
         }
         return null
     }
 
-    fun getPrevPageNum():Int?{
+    fun getPrevPageNum(): Int? {
         prev?.let {
             var query = URL(it).query
-            return query.substring(query.lastIndexOf("=")+1).toInt()
+            return query.substring(query.lastIndexOf("=") + 1).toInt()
         }
         return null
 

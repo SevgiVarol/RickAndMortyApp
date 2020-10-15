@@ -3,24 +3,35 @@ package com.example.rickandmortymodule
 import android.app.Activity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.example.rickandmortymodule.fragments.itemlist.ListAdapter
 import com.example.rickandmortymodule.models.CharacterListModel
+import com.example.rickandmortymodule.models.CharacterModel
 import java.lang.Exception
 
-object RickandMortyModule{
+object RickAndMortyModule {
     var navController: NavController? = null
     var moduleApi: ModuleApi = ModuleApi()
+    var isInNavigation: Boolean = false
 
     fun initialize(activity: Activity, navHostLayoutId: Int) {
         navController = Navigation.findNavController(activity, navHostLayoutId)
     }
-    fun getCharaters(page: Int):CharacterListModel?{
+
+    fun getCharacters(page: Int): CharacterListModel? {
         catchAll {
             return moduleApi.getCharacters(page)
         }
         return null
     }
 
-    inline fun catchAll(action: () -> Unit): String? {
+    fun getSelectedCharacterDetails(id: Int): CharacterModel?{
+        catchAll {
+            return moduleApi.getSelectedCharacterDetails(id)
+        }
+        return null
+    }
+
+    private inline fun catchAll(action: () -> Unit): String? {
         var message: String? = null
         try {
             action()

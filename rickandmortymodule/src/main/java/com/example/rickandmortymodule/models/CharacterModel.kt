@@ -13,17 +13,18 @@ data class CharacterModel(
     @SerializedName("location")
     val lastKnownLocation: LocationModel?,
     val gender: String?
-){
-    fun getStatus(): StatusType{
+) {
+    fun getStatus(): StatusType {
         status?.let {
             return StatusType.valueOf(it)
         }
-        return StatusType.Unknown
+        return StatusType.unknown
     }
+
     fun getGender(): GenderType {
         gender?.let {
             return GenderType.valueOf(it)
         }
-        return GenderType.Unknown
+        return GenderType.unknown
     }
 }

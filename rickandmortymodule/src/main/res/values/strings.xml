@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="detail">DETAILS</string>
+    <string name="lastKnownLocation">Last Known Location</string>
+    <string name="gender">Gender</string>
+</resources>

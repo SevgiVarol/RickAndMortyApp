@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.Call
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface WebService {
@@ -17,8 +18,10 @@ interface WebService {
         @Query("page") page: Int?
     ): Call<CharacterListModel>
 
-    @GET()
-    fun getCharacterById():Call<CharacterModel>
+    @GET("character/{id}")
+    fun getCharacterById(
+        @Path("id") id: Int
+    ): Call<CharacterModel>
 
     companion object {
         @Volatile
@@ -28,10 +31,13 @@ interface WebService {
             return instance
                 ?: synchronized(this) {
                     instance
-                        ?: buildWebService("https://rickandmortyapi.com/api/").also { instance = it }
+                        ?: buildWebService("https://rickandmortyapi.com/api/").also {
+                            instance = it
+                        }
                 }
         }
-        fun clearInstance(){
+
+        fun clearInstance() {
             instance = null
         }
 
@@ -47,7 +53,8 @@ interface WebService {
                             .addHeader("Content-Type", "application/json")
                             .addHeader("X-Requested-With", "XMLHttpRequest")
                             .build()
-                        chain.proceed(newRequest)}
+                        chain.proceed(newRequest)
+                    }
             }.build()
 
             return Retrofit.Builder()

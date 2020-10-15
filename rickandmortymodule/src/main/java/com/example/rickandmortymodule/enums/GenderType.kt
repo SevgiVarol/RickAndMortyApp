@@ -4,5 +4,5 @@ enum class GenderType(var gender: String) {
     Female("Female"),
     Male("Male"),
     Genderless("Genderless"),
-    Unknown("unknown")
+    unknown("Unknown")
 }
