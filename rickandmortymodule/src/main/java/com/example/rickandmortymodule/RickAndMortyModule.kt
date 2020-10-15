@@ -3,7 +3,6 @@ package com.example.rickandmortymodule
 import android.app.Activity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.example.rickandmortymodule.fragments.itemlist.ListAdapter
 import com.example.rickandmortymodule.models.CharacterListModel
 import com.example.rickandmortymodule.models.CharacterModel
 import java.lang.Exception
@@ -11,7 +10,6 @@ import java.lang.Exception
 object RickAndMortyModule {
     var navController: NavController? = null
     var moduleApi: ModuleApi = ModuleApi()
-    var isInNavigation: Boolean = false
 
     fun initialize(activity: Activity, navHostLayoutId: Int) {
         navController = Navigation.findNavController(activity, navHostLayoutId)
@@ -24,7 +22,7 @@ object RickAndMortyModule {
         return null
     }
 
-    fun getSelectedCharacterDetails(id: Int): CharacterModel?{
+    fun getSelectedCharacterDetails(id: Int): CharacterModel? {
         catchAll {
             return moduleApi.getSelectedCharacterDetails(id)
         }

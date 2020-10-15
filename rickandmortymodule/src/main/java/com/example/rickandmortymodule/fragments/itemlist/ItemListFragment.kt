@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +18,7 @@ import com.example.rickandmortymodule.databinding.FragmentItemListBinding
 import com.example.rickandmortymodule.models.BasicResultModel
 import com.example.rickandmortymodule.models.CharacterListModel
 
-class ItemListFragment : Fragment(), ListAdapter.ItemClickListener {
+class ItemListFragment : Fragment() {
     private lateinit var viewModel: ItemListViewModel
     var adapter: ListAdapter = ListAdapter()
     var recyclerView: RecyclerView? = null
@@ -55,25 +56,30 @@ class ItemListFragment : Fragment(), ListAdapter.ItemClickListener {
 
                 }
             })
-            if (RickAndMortyModule.isInNavigation){
-                RickAndMortyModule.isInNavigation = false
-                recyclerView?.adapter = adapter
-            } else{
-                adapter.setClickListener(this)
-                loadList(this).execute()
-            }
+            adapter.setClickListener(viewModel)
+            loadList(this).execute()
+
+            listenEvents()
 
         }.root
     }
 
-    override fun onItemClick(view: View, position: Int) {
-        var selectedCharacterId = adapter.list.get(position).id
-        var position =  (recyclerView?.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
-        val bundle = bundleOf(
-            "id" to selectedCharacterId
-        )
-        RickAndMortyModule.isInNavigation = true
-        RickAndMortyModule.navController?.navigate(R.id.action_itemListFragment_to_detailPageFragment,bundle)
+    private fun listenEvents() {
+        viewModel.itemSelected.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                var selectedCharacterId = adapter.list.get(it).id
+                var position =
+                    (recyclerView?.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+                val bundle = bundleOf(
+                    "id" to selectedCharacterId
+                )
+                RickAndMortyModule.navController?.navigate(
+                    R.id.action_itemListFragment_to_detailPageFragment,
+                    bundle
+                )
+            }
+
+        })
     }
 
     class loadList(
